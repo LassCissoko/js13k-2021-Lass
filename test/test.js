@@ -52,4 +52,19 @@ describe("Test logique du jeu", () => {
         assert.strictEqual(gameState.health, 100, "La santé doit être instanciée à 100");
         assert.strictEqual(gameState.score, 0, "Le score doit être instanciée à 0");
     })
+
+    it("Game Over, lorsque la santé est à 0", () => {
+        gameState.health = 10;
+
+        const takeDamage = (damage) => {
+            gameState.health -= damage;
+            if (gameState.health <= 0) {
+                document.exitPointerLock();
+                document.querySelector('.e').hidden = false;
+            }
+        };
+
+        takeDamage(20);
+        assert.strictEqual(gameState.health, -10);
+    })
 })

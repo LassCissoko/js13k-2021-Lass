@@ -1,6 +1,6 @@
 export var gameState = {
   score: 0,
-  health: 100
+  health: 100,
 };
 
 import { findTarget, getRange, RANGE_MELEE } from './ai.js';
