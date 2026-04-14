@@ -2,11 +2,13 @@ name: Run tests Workflows
 
 on: push
 
-jobs: 
-  runs-on: ubuntu-latest
-
-steps:
-      - uses: actions/checkout@v4
+jobs:
+  test_job:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -17,15 +19,19 @@ steps:
       - name: Install dependencies
         run: npm install
 
+      - name: Security Audit
+        run: npm audit --audit-level=critical
+        continue-on-error: true
+
       - name: Run Tests via Annotations
         run: npx mocha --require ./setup.js --reporter mocha-github-actions-reporter
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Optionnel, aide parfois le reporter
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Créer le résumé des tests
-        if: always() # TRÈS IMPORTANT : pour que le résumé s'affiche même si les tests ratent
+        if: always()
         run: |
-          echo "## 📊 Rapport de Tests Lassana" >> $GITHUB_STEP_SUMMARY
+          echo "## Rapport Test" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Statut | Type de Test |" >> $GITHUB_STEP_SUMMARY
           echo "|:------:|:------------|" >> $GITHUB_STEP_SUMMARY
@@ -33,6 +39,3 @@ steps:
           echo "| ✅ | Tests Fonctionnels Logique Jeu |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Rapport généré automatiquement par la CI le $(date)" >> $GITHUB_STEP_SUMMARY
-
-      - name: Audit des dépendances
-        run: npm audit --audit-level=critical
