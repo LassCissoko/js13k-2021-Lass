@@ -1,6 +1,5 @@
-
-
 import assert  from "assert";
+
 // import test unitaires
 import { randFloatSpread, mapLinear, lerp } from '../src/math.js';
 
