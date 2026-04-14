@@ -1,9 +1,13 @@
-import { randFloatSpread } from '../src/math.js';
-import { mapLinear } from '../src/math.js';
-import { lerp } from '../src/math.js';
+
 
 import assert  from "assert";
+// import test unitaires
+import { randFloatSpread, mapLinear, lerp } from '../src/math.js';
 
+// import test fonctionnels
+ import { gameState } from '../src/maps.js';
+
+// Tests unitaires
 describe("Utilitire Mathématique", () => {
     it("Doit retourner un nombre compris entre 0 & -1", ()  => {
 
@@ -41,3 +45,11 @@ describe("Test de lerp", () => {
         assert.strictEqual(result, -15.3);
     });
 });
+
+// Tests fonctionnels
+describe("Test logique du jeu", () => {
+    it("Vérifier que au lancement du jeu que le score & la santé sont bien instanciés", () => {
+        assert.strictEqual(gameState.health, 100, "La santé doit être instanciée à 100");
+        assert.strictEqual(gameState.score, 0, "Le score doit être instanciée à 0");
+    })
+})

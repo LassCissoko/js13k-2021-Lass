@@ -1,6 +1,6 @@
 import { randFloatSpread } from './math.js';
 
-var audioContext = new AudioContext();
+export var audioContext = new AudioContext();
 var { sampleRate } = audioContext;
 
 // A4 is 69.

@@ -1,3 +1,8 @@
+export var gameState = {
+  score: 0,
+  health: 100
+};
+
 import { findTarget, getRange, RANGE_MELEE } from './ai.js';
 import { playEnemyDeath, playShoot } from './audio.js';
 import { boxGeom_create } from './boxGeom.js';
@@ -123,8 +128,8 @@ export var map0 = (gl, scene, camera) => {
   var player = player_create(playerMesh, playerPhysics);
   player.scene = map;
 
-  var health = 100;
-  var score = 0;
+   gameState.health;
+   gameState.score;
 
   var updateShadowCamera = () => {
     var offset = 512;

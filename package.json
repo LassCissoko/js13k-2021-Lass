@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "mocha",
+    "test": "mocha --require ./setup.js",
     "lint": "eslint",
     "lint:fix": "eslint . --fix"
   },
