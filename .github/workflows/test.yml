@@ -1,6 +1,13 @@
 name: Run tests Workflows
 
-on: push
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+  workflows_dispatch:
 
 jobs:
   test_job:
@@ -18,6 +25,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Run Linter
+        run: npx eslint . --format stylish
+        continue-on-error: true
 
       - name: Security Audit
         run: npm audit --audit-level=critical
@@ -38,4 +49,3 @@ jobs:
           echo "| ✅ | Tests Unitaires Mathématiques |" >> $GITHUB_STEP_SUMMARY
           echo "| ✅ | Tests Fonctionnels Logique Jeu |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Rapport généré automatiquement par la CI le $(date)" >> $GITHUB_STEP_SUMMARY
