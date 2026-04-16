@@ -49,13 +49,13 @@ jobs:
           echo "| ✅ | Tests Unitaires Mathématiques |" >> $GITHUB_STEP_SUMMARY
           echo "| ✅ | Tests Fonctionnels Logique Jeu |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          deploy:
           
-    needs: test_job # On ne déploie que si les tests passent !
+  deploy:
+    needs: test_job 
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # Pour avoir le droit de pousser sur GHCR
+      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
