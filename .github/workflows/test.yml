@@ -72,4 +72,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/js13k-game:latest
+          tags: ghcr.io/${{ lasscissoko }}/js13k-game:latest #Je met directement le nom de mon profil car la syntaxe exige le prifl en miniscule
