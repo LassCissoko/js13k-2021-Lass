@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { randFloatSpread } from './math.js';
 
 export var audioContext = new AudioContext();
@@ -182,6 +183,5 @@ var enemyDeath = generateNotes(
   0.4,
 );
 export var playEnemyDeath = () => play(enemyDeath[15]);
-
 
 addEventListener('click', () => audioContext.resume(), { once: true });

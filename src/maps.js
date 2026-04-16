@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export var gameState = {
   score: 0,
   health: 100,
@@ -128,8 +129,8 @@ export var map0 = (gl, scene, camera) => {
   var player = player_create(playerMesh, playerPhysics);
   player.scene = map;
 
-   gameState.health;
-   gameState.score;
+  gameState.health;
+  gameState.score;
 
   var updateShadowCamera = () => {
     var offset = 512;
@@ -373,8 +374,8 @@ export var map0 = (gl, scene, camera) => {
   };
 
   var takeDamage = (damage = 2) => {
-    health -= damage;
-    if (health <= 0) {
+    gameState.health -= damage;
+    if (gameState.health <= 0) {
       document.exitPointerLock();
       document.querySelector('.e').hidden = false;
     }
@@ -753,9 +754,9 @@ export var map0 = (gl, scene, camera) => {
 
       updateShadowCamera();
 
-      health = clamp(health + 1 * dt, 0, 100);
-      document.querySelector('.h').textContent = Math.round(health);
-      document.querySelector('.s').textContent = score;
+      gameState.health = clamp(gameState.health + 1 * dt, 0, 100);
+      document.querySelector('.h').textContent = Math.round(gameState.health);
+      document.querySelector('.s').textContent = gameState.score;
 
       if (playerMesh.position.y <= -2048) {
         takeDamage(100);
@@ -811,8 +812,8 @@ export var map0 = (gl, scene, camera) => {
           if (entity === playerMesh) return false;
           createExplosion(bullet.position);
           object3d_remove(map, bullet);
-          if (entity.isPhantom) score += 100;
-          if (entity.isScanner) score += 50;
+          if (entity.isPhantom) gameState.score += 100;
+          if (entity.isScanner) gameState.score += 50;
         };
       }
 
