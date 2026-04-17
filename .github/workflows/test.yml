@@ -31,7 +31,8 @@ jobs:
         continue-on-error: true
 
       - name: Security Audit
-        run: npm audit --audit-level=critical || true
+        run: npm audit --audit-level=critical
+        continue-on-error: true
 
       - name: Run Tests via Annotations
         run: npx mocha --require ./setup.js --reporter mocha-github-actions-reporter
@@ -59,16 +60,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Log in to GitHub Container Registry
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/lasscissoko/js13k-game:latest #Je met directement le nom de mon profil car la syntaxe exige le prifl en miniscule
+      - name: Build and Push
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          docker build -t $IMAGE_ID:latest .
+          docker push $IMAGE_ID:latest
