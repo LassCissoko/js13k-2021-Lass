@@ -31,8 +31,7 @@ jobs:
         continue-on-error: true
 
       - name: Security Audit
-        run: npm audit --audit-level=critical
-        continue-on-error: true
+        run: npm audit --audit-level=critical || true
 
       - name: Run Tests via Annotations
         run: npx mocha --require ./setup.js --reporter mocha-github-actions-reporter
